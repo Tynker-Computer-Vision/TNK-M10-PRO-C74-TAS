@@ -15,7 +15,6 @@ for img in os.listdir(path):
         print(img)
         if img!='.git':
             age = img.split("_")[0]
-            genders = img.split("_")[1]
             img = cv2.imread(str(path)+"/"+str(img))
             img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
             

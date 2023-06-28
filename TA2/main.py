@@ -3,27 +3,38 @@ import os
 import cv2
 from cvzone.FaceDetectionModule import FaceDetector
 
-# Create a path variable that holds relative address to the dataset folder
+path = "Face-image-dataset-small"
+images = []
+ages = []
 
-''' 
-Lable the files named 0,1,2 in the path folder as follows
-
-1_0_0_20161219154909149.jpg.chip
-10_0_0_20170110225557604.jpg.chip
-101_1_2_20170105174739309.jpg.chip
-'''
 detector = FaceDetector()
 
-# Iterate through each image i.e img in the variable path
+for img in os.listdir(path):
+    try:
+        print(img)
 
-    # Write a try block
-    
-        # Print the img
+        # Check if img is not equal to .git i.e a wrong format image 
+        if img!='.git':
+            # Get the age from the image path i.e img
+            age = img.split("_")[0]
+            #Append age to ages array
+            ages.append(age)
+
+            # Read the image
+            img = cv2.imread(str(path)+"/"+str(img))
+            # Convert image from BGR to RGB format
+            img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
+
+            # Write the age on the image
+            img = cv2.putText(img, "Age = "+ age, (50, 20), cv2.FONT_HERSHEY_DUPLEX, 0.5, (0, 0, 255), 1)
         
-    # Except print error in reading
-    
+            cv2.imshow("img", img)
+            cv2.waitKey(0)
+    except:
+        print("error in reading")
+        
+# Convert ages to np.array
+ages = np.array(ages,dtype=np.int64)
 
-
-
-
-
+# Print ages
+print("Age",ages)

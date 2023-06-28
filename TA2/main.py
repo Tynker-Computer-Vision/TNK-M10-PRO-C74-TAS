@@ -25,7 +25,7 @@ for img in os.listdir(path):
             # Convert image from BGR to RGB format
             img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
 
-            # Write the age on the image
+            # Display the age on the image
             img = cv2.putText(img, "Age = "+ age, (50, 20), cv2.FONT_HERSHEY_DUPLEX, 0.5, (0, 0, 255), 1)
         
             cv2.imshow("img", img)
